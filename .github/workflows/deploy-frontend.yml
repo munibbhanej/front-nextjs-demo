@@ -30,6 +30,7 @@ jobs:
       - name: Run tests (if any)
         run: npm test --if-present
 
+
   # Job 2 - CD (runs only if CI passes)
   deploy:
     name: CD - Deploy to Amplify
