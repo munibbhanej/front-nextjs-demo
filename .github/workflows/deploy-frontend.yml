@@ -1,4 +1,5 @@
 name: Deploy Next.js to Amplify
+
 on:
   push:
     branches:
@@ -12,20 +13,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # Verify your actual Amplify app region
-          aws-region: us-east-1
-
-      # This triggers the Amplify build via AWS CLI.
-      # It assumes you have an Amplify App already connected to this repository.
-      - name: Trigger Amplify Build
+      - name: Trigger Amplify build via webhook
         run: |
-          aws amplify start-job \
-            --app-id ${{ secrets.AMPLIFY_APP_ID }} \
-            --branch-name main \
-            --job-type RELEASE
+          curl -X POST -d {} "${{ secrets.AMPLIFY_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json"
+
+      - name: Wait for deploy
+        run: echo "Amplify build triggered successfully!"
