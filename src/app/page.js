@@ -34,7 +34,7 @@ export default function Home() {
       <div className={styles.card}>
         <div className={styles.header}>
           <div className={styles.badge}>AWS Amplify</div>
-          <h1 className={styles.title}>Task Manager</h1>
+          <h1 className={styles.title}>Task</h1>
           <p className={styles.subtitle}>
             {done} of {todos.length} tasks completed
           </p>
